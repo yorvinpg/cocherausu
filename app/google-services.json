@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "734076835706",
+    "firebase_url": "https://cocherapp.firebaseio.com",
+    "project_id": "cocherapp",
+    "storage_bucket": "cocherapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734076835706:android:4377d1465d1fe690cce8c3",
+        "android_client_info": {
+          "package_name": "com.example.cocheraadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734076835706-pgu1mmh8utdv0tp140gg84i3d8fgjav4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cocheraadmin",
+            "certificate_hash": "9d4ba07eb16d2912197284cbf06535b5f286c89e"
+          }
+        },
+        {
+          "client_id": "734076835706-dmsr15clm7vsjkvqefkmsjca7s63sdcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTYP2WRWx03iih0r-vVffKk2dna2q-kT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734076835706-dmsr15clm7vsjkvqefkmsjca7s63sdcd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734076835706:android:d294ab5447664301cce8c3",
+        "android_client_info": {
+          "package_name": "com.example.cocheraapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734076835706-ll290gur0g2u6j218lnek6b6m7l0uubq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cocheraapp",
+            "certificate_hash": "9d4ba07eb16d2912197284cbf06535b5f286c89e"
+          }
+        },
+        {
+          "client_id": "734076835706-8v3phe2c8uo28sau8d8e81c51l69mi0e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cocheraapp",
+            "certificate_hash": "ac7ad8894d85940183d6264746dc4e0dda365359"
+          }
+        },
+        {
+          "client_id": "734076835706-dmsr15clm7vsjkvqefkmsjca7s63sdcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTYP2WRWx03iih0r-vVffKk2dna2q-kT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734076835706-dmsr15clm7vsjkvqefkmsjca7s63sdcd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
