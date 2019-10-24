@@ -61,19 +61,7 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try
-                {
-                    // Launch Waze to look for Hawaii:
-                    String url = "https://waze.com/ul?q=Hawaii";
-                    Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
-                    startActivity( intent );
-                }
-                catch ( ActivityNotFoundException ex  )
-                {
-                    // If Waze is not installed, open it in Google Play:
-                    Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
-                    startActivity(intent);
-                }
+            
                 for
                 (Marker maker : realTimeMarkers)
                 {
