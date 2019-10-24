@@ -61,7 +61,7 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            
+
                 for
                 (Marker maker : realTimeMarkers)
                 {
