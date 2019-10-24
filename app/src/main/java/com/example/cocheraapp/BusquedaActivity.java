@@ -3,6 +3,9 @@ package com.example.cocheraapp;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -58,7 +61,21 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (Marker maker : realTimeMarkers)
+                try
+                {
+                    // Launch Waze to look for Hawaii:
+                    String url = "https://waze.com/ul?q=Hawaii";
+                    Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+                    startActivity( intent );
+                }
+                catch ( ActivityNotFoundException ex  )
+                {
+                    // If Waze is not installed, open it in Google Play:
+                    Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
+                    startActivity(intent);
+                }
+                for
+                (Marker maker : realTimeMarkers)
                 {
                         maker.remove();
                 }
@@ -71,10 +88,12 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
                     markerOptions.position(new LatLng(latitud, longitud));
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
                 }
+
                 realTimeMarkers.clear();
                 realTimeMarkers.addAll(tmpRealTimeMarkers);
 
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
