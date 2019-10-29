@@ -166,8 +166,5 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public String getcontraseña(){
         return cla;
     }
-    //public Spinner gettipo(){
-        //return spinner;//
-   // }//
 
 }

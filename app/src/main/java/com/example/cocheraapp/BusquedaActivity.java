@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -54,7 +55,7 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
         mDatabase.child("Maps").addValueEventListener(new ValueEventListener()
@@ -72,9 +73,16 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
                     PuntoMaps pm = snapshot.getValue(PuntoMaps.class);
                     Double latitud = pm.getLatitud();
                     Double longitud = pm.getLongitud();
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(new LatLng(latitud, longitud));
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(new LatLng(latitud, longitud))
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                    
+
+
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
+
+
+
                 }
 
                 realTimeMarkers.clear();
