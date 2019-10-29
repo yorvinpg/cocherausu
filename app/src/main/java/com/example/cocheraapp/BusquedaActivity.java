@@ -76,7 +76,6 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
                     MarkerOptions markerOptions = new MarkerOptions()
                             .position(new LatLng(latitud, longitud))
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-                    
 
 
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
