@@ -10,6 +10,10 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -22,6 +26,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +41,12 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
     private DatabaseReference mDatabase;
     private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
     private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
+    ImageView imgmarker;
+    private BottomSheetBehavior mBottomSheetBehavior1;
+    LinearLayout tapactionlayout;
+    View white_forground_view;
+    View bottomSheet;
+    TextView txtnombre_local, txtDireccion, txtHorario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,8 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+       
     }
 
 
