@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -95,7 +96,9 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                Toast.makeText(BusquedaActivity.this, "Error en linea ", Toast.LENGTH_SHORT).show();
 
             }
         });
