@@ -1,15 +1,23 @@
 package com.example.cocheraapp;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -52,6 +60,7 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         mDatabase.child("Maps").addValueEventListener(new ValueEventListener()
@@ -69,10 +78,15 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
                     PuntoMaps pm = snapshot.getValue(PuntoMaps.class);
                     Double latitud = pm.getLatitud();
                     Double longitud = pm.getLongitud();
+                    LatLng coordenadas = new LatLng(latitud,longitud);
                     MarkerOptions markerOptions = new MarkerOptions()
-                            .position(new LatLng(latitud, longitud))
+                            .position(coordenadas)
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
+                    CameraPosition cameraPosition = new CameraPosition.Builder().zoom(16).target(coordenadas).build();
+
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
+
 
                 }
                 realTimeMarkers.clear();
@@ -94,4 +108,5 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
         //      .setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
 }
