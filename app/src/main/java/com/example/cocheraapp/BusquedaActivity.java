@@ -3,9 +3,6 @@ package com.example.cocheraapp;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +28,6 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
     private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
     private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,18 +51,18 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(final GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         mDatabase.child("Maps").addValueEventListener(new ValueEventListener()
         {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for
-                (Marker maker : realTimeMarkers)
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                for (Marker maker : realTimeMarkers)
                 {
-                        maker.remove();
+                    maker.remove();
+
                 }
                 for (DataSnapshot snapshot:dataSnapshot.getChildren())
                 {
@@ -75,27 +71,27 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
                     Double longitud = pm.getLongitud();
                     MarkerOptions markerOptions = new MarkerOptions()
                             .position(new LatLng(latitud, longitud))
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-
-
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
 
-
-
                 }
-
                 realTimeMarkers.clear();
                 realTimeMarkers.addAll(tmpRealTimeMarkers);
 
             }
 
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
+        // Add a marker in Sydney and move the camera
+        //LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions()
+        //      .position(sydney)
+        //      .title("Marker in Sydney"))
+        //      .setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
