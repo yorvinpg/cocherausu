@@ -2,9 +2,12 @@ package com.example.cocheraapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     String   Usuario, Pass;
     ProgressDialog dialog;
 
+    private int My_PERMISSIONS_REQUEST_READ_CONTACTS;
+
     public  static  final String userEmail="";
 
     public static  final String TAG="LOGIN";
@@ -50,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
+
         olvi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (mUser != null){
-                    Intent intent= new Intent(LoginActivity.this, MenUsuActivity.class);
+                    Intent intent= new Intent(LoginActivity.this, BusquedaActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -85,7 +92,23 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //permiso para activar la ubicacion
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(LoginActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    My_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            return;
+        }
     }
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -105,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void userSing(){
+
         Usuario = usuario.getText().toString().trim();
         Pass   = pass.getText().toString().trim();
         if (TextUtils.isEmpty(Usuario)){
@@ -146,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
         else {
             usuario.getText().clear();
             pass.getText().clear();
-            Intent intent= new Intent(LoginActivity.this, MenUsuActivity.class);
+            Intent intent= new Intent(LoginActivity.this, BusquedaActivity.class);
             intent.putExtra(userEmail,Usuario);
             startActivity(intent);
 
