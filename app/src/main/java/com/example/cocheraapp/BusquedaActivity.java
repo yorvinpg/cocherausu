@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -41,12 +42,7 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
     private DatabaseReference mDatabase;
     private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
     private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
-    ImageView imgmarker;
-    private BottomSheetBehavior mBottomSheetBehavior1;
-    LinearLayout tapactionlayout;
-    View white_forground_view;
-    View bottomSheet;
-    TextView txtnombre_local, txtDireccion, txtHorario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,25 +55,22 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-       
+
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
 
-        mDatabase.child("Maps").addValueEventListener(new ValueEventListener()
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+
+        mDatabase.child("Cochera").addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -97,8 +90,8 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
                             .position(coordenadas)
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
                     CameraPosition cameraPosition = new CameraPosition.Builder().zoom(16).target(coordenadas).build();
-
                     mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
 
 
@@ -116,13 +109,13 @@ public class BusquedaActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions()
-        //      .position(sydney)
-        //      .title("Marker in Sydney"))
-        //      .setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        /*Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        Map.addMarker(new MarkerOptions()
+             .position(sydney)
+             .title("Marker in Sydney"))
+             .setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
 }
